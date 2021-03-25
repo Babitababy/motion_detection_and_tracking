@@ -1,16 +1,16 @@
 import cv2
 import numpy as np
 
-cap=cv2.VideoCapture(0)
+capture=cv2.VideoCapture(0)
 
 fourcc=cv2.VideoWriter_fourcc('X','V','I','D')
 #fourcc=cv2.VideoWriter(*"XVID")
 out=cv2.VideoWriter('motion.avi',fourcc,20.0,(640,480))
 
-ret,frame1=cap.read()
-ret,frame2=cap.read()
+ret,frame1=capture.read()
+ret,frame2=capture.read()
 
-while cap.isOpened():
+while capture.isOpened():
     diff=cv2.absdiff(frame1,frame2)
     gray=cv2.cvtColor(diff,cv2.COLOR_BGR2GRAY)
 
@@ -29,11 +29,11 @@ while cap.isOpened():
 
     cv2.imshow("feed", frame1)
     frame1 = frame2
-    ret,frame2=cap.read()
+    ret,frame2=capture.read()
 
     if cv2.waitKey(40)==27:
         break
 
 cv2.destroyAllWindows()
-cap.release()
+capture.release()
 
